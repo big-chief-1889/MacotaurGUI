@@ -2,10 +2,23 @@
 
 Mac app for [Macotaur](https://github.com/big-chief-1889/Macotaur), a Tari C29 GPU miner for Apple Silicon.
 
+## Download
+
+Get `Macotaur-<version>.zip` from [Releases](https://github.com/big-chief-1889/MacotaurGUI/releases) and unzip it. The app is ad-hoc signed and not notarized, so macOS won't open it the first time. Either open System Settings › Privacy & Security and click Open Anyway, or clear the download flag:
+
+```
+xattr -dr com.apple.quarantine Macotaur.app
+```
+
+It needs an Apple Silicon Mac running macOS 15 or later.
+
 ## Requirements
 
+To build it yourself:
+
+
 - An Apple Silicon Mac running macOS 15 or later
-- Xcode to build (the Command Line Tools alone lack SwiftUI's macros)
+- Xcode (the Command Line Tools alone lack SwiftUI's macros)
 
 ## Build
 
@@ -41,6 +54,8 @@ swift test
 `MACOTAUR_GPU_TESTS=1 swift test` also runs the live tests, which mine on the GPU against a local mock pool for about two minutes.
 
 GPU power, clock and fan readings come from IOReport and the SMC (`Sources/CMacotaurPower`). IOReport is a private API, so it's loaded at runtime and every reading is optional. The miner package uses public APIs only.
+
+`./scripts/package.sh` builds the app and zips it for a release.
 
 The app icon is drawn in code. To regenerate `Resources/AppIcon.icns`, run `swift scripts/make-icon.swift`.
 

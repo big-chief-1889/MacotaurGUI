@@ -37,5 +37,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 </plist>
 PLIST
 
+# Debug info records the build machine's paths; a release doesn't need it.
+strip -S -x "$APP/Contents/MacOS/Macotaur"
 codesign --force --sign - "$APP"
 echo "Built $APP"
